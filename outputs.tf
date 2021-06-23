@@ -18,5 +18,4 @@ output "storage" {
     secret_key = aws_iam_access_key.user.secret
   }
   sensitive = true
-
 }
