@@ -1,6 +1,6 @@
 resource "tfe_workspace" "workspace" {
-  name         = var.config["name"]
-  organization = "ryanwholey"
+  name         = var.name
+  organization = var.organization
 }
 
 resource "tfe_variable" "test" {
