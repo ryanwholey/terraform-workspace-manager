@@ -24,3 +24,29 @@ data "aws_kms_secrets" "secrets" {
     }
   }
 }
+
+resource "aws_iam_user" "user" {
+  name = "terraform-workspace-manager"
+}
+
+resource "aws_iam_access_key" "user" {
+  user = aws_iam_user.user.name
+}
+
+data "aws_iam_policy_document" "user" {
+  statement {
+    actions = [
+      "s3:*",
+    ]
+
+    resources = [
+      aws_s3_bucket.workspace_configs.arn,
+      "${aws_s3_bucket.workspace_configs.arn}/*",
+    ]
+  }
+
+resource "aws_iam_user_policy" "lb_ro" {
+  name   = "terraform-workspace-manager"
+  user   = aws_iam_user.user.name
+  policy = data.aws_iam_policy_document.user.json
+}

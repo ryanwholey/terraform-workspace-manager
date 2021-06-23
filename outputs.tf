@@ -10,3 +10,12 @@ output "secrets" {
   value     = data.aws_kms_secrets.secrets.plaintext
   sensitive = true
 }
+
+output "storage" {
+  value = {
+    bucket = aws_s3_bucket.workspace_configs.bucket
+    access_key = aws_iam_access_key.user.id
+    secret_key = aws_iam_access_key.user.secret
+  }
+
+}
