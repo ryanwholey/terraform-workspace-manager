@@ -44,6 +44,7 @@ data "aws_iam_policy_document" "user" {
       "${aws_s3_bucket.workspace_configs.arn}/*",
     ]
   }
+}
 
 resource "aws_iam_user_policy" "lb_ro" {
   name   = "terraform-workspace-manager"
